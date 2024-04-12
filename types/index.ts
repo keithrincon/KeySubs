@@ -16,7 +16,7 @@ export type UpdateUserParams = {
 };
 
 // ====== EVENT PARAMS
-export type CreateEventParams = {
+export type CreateTeamParams = {
   userId: string;
   event: {
     title: string;
@@ -33,7 +33,7 @@ export type CreateEventParams = {
   path: string;
 };
 
-export type UpdateEventParams = {
+export type UpdateTeamParams = {
   userId: string;
   event: {
     _id: string;
@@ -51,32 +51,32 @@ export type UpdateEventParams = {
   path: string;
 };
 
-export type DeleteEventParams = {
+export type DeleteTeamParams = {
   eventId: string;
   path: string;
 };
 
-export type GetAllEventsParams = {
+export type GetAllTeamsParams = {
   query: string;
   category: string;
   limit: number;
   page: number;
 };
 
-export type GetEventsByUserParams = {
+export type GetTeamsByUserParams = {
   userId: string;
   limit?: number;
   page: number;
 };
 
-export type GetRelatedEventsByCategoryParams = {
+export type GetRelatedTeamsByCategoryParams = {
   categoryId: string;
   eventId: string;
   limit?: number;
   page: number | string;
 };
 
-export type Event = {
+export type Team = {
   _id: string;
   title: string;
   description: string;
