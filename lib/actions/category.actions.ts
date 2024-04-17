@@ -15,9 +15,14 @@ export const createCategory = async ({
 
     return JSON.parse(JSON.stringify(newCategory));
   } catch (error) {
-    handleError(error);
+    if (error instanceof Error) {
+      handleError(error);
+    } else {
+      console.error('Unexpected error:', error);
+    }
   }
 };
+
 export const getAllCategories = async () => {
   try {
     await connectToDatabase();
@@ -26,6 +31,10 @@ export const getAllCategories = async () => {
 
     return JSON.parse(JSON.stringify(categories));
   } catch (error) {
-    handleError(error);
+    if (error instanceof Error) {
+      handleError(error);
+    } else {
+      console.error('Unexpected error:', error);
+    }
   }
 };

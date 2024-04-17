@@ -36,6 +36,7 @@ type TeamFormProps = {
 const TeamForm = ({ userId, type }: TeamFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
   const initialValues = eventDefaultValues;
+
   const router = useRouter();
 
   const { startUpload } = useUploadThing('imageUploader');
@@ -60,6 +61,7 @@ const TeamForm = ({ userId, type }: TeamFormProps) => {
       }
       uploadedImageUrl = uploadedImages[0].url;
     }
+
     if (type === 'Create') {
       try {
         const newEvent = await createEvent({
