@@ -1,8 +1,19 @@
+import Collection from '@/components/shared/Collection';
 import { Button } from '@/components/ui/button';
+import { getAllTeams } from '@/lib/actions/event.action';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Home() {
+export default async function Home() {
+  const teams = await getAllTeams({
+    query: '',
+    category: '',
+    page: 1,
+    limit: 6,
+  });
+
+  console.log(teams);
+
   return (
     <>
       <section className='bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10'>
@@ -14,7 +25,7 @@ export default function Home() {
               there choice and free agents to find a team that fits there needs.
             </p>
             <Button size='lg' asChild className='button w-full sm:w-fit'>
-              <Link href='#events'>Explore Now</Link>
+              <Link href='#teams'>Explore Now</Link>
             </Button>
           </div>
 
@@ -29,7 +40,8 @@ export default function Home() {
       </section>
 
       <section
-        id='events'
+        id='team'
+        // id='events'
         className='wrapper my-8 flex flex-col gap-8 md:gap-12'
       >
         <h2 className='h2-bold'>
@@ -37,8 +49,19 @@ export default function Home() {
         </h2>
 
         <div className='flex w-full flex-col gap-5 md:flex-row'>
-          Search CategoryFilter
+          {/* <Search />
+          <CategoryFilter /> */}
         </div>
+
+        <Collection
+          data={teams?.data}
+          emptyTitle='No teams yet created'
+          emptyStateSubtext='Comeback later'
+          collectionType='All_Teams'
+          limit={6}
+          page={1}
+          totalPages={2}
+        />
       </section>
     </>
   );

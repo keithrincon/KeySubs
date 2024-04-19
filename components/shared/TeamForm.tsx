@@ -15,28 +15,38 @@ import {
 import { Input } from '@/components/ui/input';
 import { teamFormSchema } from '@/lib/validator';
 import * as z from 'zod';
-import { eventDefaultValues } from '@/constants';
+import { teamDefaultValues } from '@/constants';
 import Dropdown from './Dropdown';
 import { Textarea } from '@/components/ui/textarea';
 import { FileUploader } from './FileUploader';
 import { useState } from 'react';
 import Image from 'next/image';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { Checkbox } from '@/components/ui/checkbox';
 import { useUploadThing } from '@/lib/uploadthing';
+
+import 'react-datepicker/dist/react-datepicker.css';
+import { Checkbox } from '../ui/checkbox';
 import { useRouter } from 'next/navigation';
-import { createEvent } from '@/lib/actions/event.action';
+import { createTeam, updateTeam } from '@/lib/actions/event.action';
+import { ITeam } from '@/lib/database/models/team.model';
 
 type TeamFormProps = {
   userId: string;
   type: 'Create' | 'Update';
+  team?: ITeam;
+  teamId?: string;
 };
 
-const TeamForm = ({ userId, type }: TeamFormProps) => {
+const TeamForm = ({ userId, type, team, teamId }: TeamFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
-  const initialValues = eventDefaultValues;
-
+  const initialValues =
+    team && type === 'Update'
+      ? {
+          ...team,
+          startDateTime: new Date(team.startDateTime),
+          endDateTime: new Date(team.endDateTime),
+        }
+      : teamDefaultValues;
   const router = useRouter();
 
   const { startUpload } = useUploadThing('imageUploader');
@@ -46,11 +56,7 @@ const TeamForm = ({ userId, type }: TeamFormProps) => {
     defaultValues: initialValues,
   });
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof teamFormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-
     let uploadedImageUrl = values.imageUrl;
 
     if (files.length > 0) {
@@ -59,20 +65,42 @@ const TeamForm = ({ userId, type }: TeamFormProps) => {
       if (!uploadedImages) {
         return;
       }
+
       uploadedImageUrl = uploadedImages[0].url;
     }
 
     if (type === 'Create') {
       try {
-        const newEvent = await createEvent({
-          event: { ...values, imageUrl: uploadedImageUrl },
+        const newTeam = await createTeam({
+          team: { ...values, imageUrl: uploadedImageUrl },
           userId,
           path: '/profile',
         });
-        if (newEvent) {
+
+        if (newTeam) {
           form.reset();
-          router.push(`/teams/${newEvent._id}`);
-          // router.push(`/events/${newEvent._id}`);
+          router.push(`/teams/${newTeam._id}`);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (type === 'Update') {
+      if (!teamId) {
+        router.back();
+        return;
+      }
+
+      try {
+        const updatedTeam = await updateTeam({
+          userId,
+          team: { ...values, imageUrl: uploadedImageUrl, _id: teamId },
+          path: `/teams/${teamId}`,
+        });
+
+        if (updatedTeam) {
+          form.reset();
+          router.push(`/teams/${updatedTeam._id}`);
         }
       } catch (error) {
         console.log(error);
@@ -105,7 +133,6 @@ const TeamForm = ({ userId, type }: TeamFormProps) => {
           />
           <FormField
             control={form.control}
-            // name='SportId' - didnt accept it! **check it later
             name='categoryId'
             render={({ field }) => (
               <FormItem className='w-full'>
@@ -120,6 +147,7 @@ const TeamForm = ({ userId, type }: TeamFormProps) => {
             )}
           />
         </div>
+
         <div className='flex flex-col gap-5 md:flex-row'>
           <FormField
             control={form.control}
@@ -312,6 +340,7 @@ const TeamForm = ({ userId, type }: TeamFormProps) => {
                       width={24}
                       height={24}
                     />
+
                     <Input
                       placeholder='URL'
                       {...field}
@@ -331,7 +360,7 @@ const TeamForm = ({ userId, type }: TeamFormProps) => {
           disabled={form.formState.isSubmitting}
           className='button col-span-2 w-full'
         >
-          {form.formState.isSubmitting ? 'Submitting...' : `${type} Event `}
+          {form.formState.isSubmitting ? 'Submitting...' : `${type} Team `}
         </Button>
       </form>
     </Form>

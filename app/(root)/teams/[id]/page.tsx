@@ -1,10 +1,25 @@
-import { getTeamById } from '@/lib/actions/event.action';
+import CheckoutButton from '@/components/shared/CheckoutButton';
+import Collection from '@/components/shared/Collection';
+import {
+  getTeamById,
+  getRelatedTeamsByCategory,
+} from '@/lib/actions/event.action';
 import { formatDateTime } from '@/lib/utils';
 import { SearchParamProps } from '@/types';
 import Image from 'next/image';
 
-const TeamDetails = async ({ params: { id } }: SearchParamProps) => {
+const TeamDetails = async ({
+  params: { id },
+  searchParams,
+}: SearchParamProps) => {
   const team = await getTeamById(id);
+
+  const relatedTeams = await getRelatedTeamsByCategory({
+    categoryId: team.category._id,
+    teamId: team._id,
+    page: searchParams.page as string,
+  });
+
   return (
     <>
       <section className='flex justify-center bg-primary-50 bg-dotted-pattern bg-contain'>
@@ -40,7 +55,8 @@ const TeamDetails = async ({ params: { id } }: SearchParamProps) => {
               </div>
             </div>
 
-            {/* <CheckoutButton /> */}
+            <CheckoutButton team={team} />
+
             <div className='flex flex-col gap-5'>
               <div className='flex gap-2 md:gap-3'>
                 <Image
@@ -70,6 +86,7 @@ const TeamDetails = async ({ params: { id } }: SearchParamProps) => {
                 <p className='p-medium-16 lg:p-regular-20'>{team.location}</p>
               </div>
             </div>
+
             <div className='flex-flex-col gap-2'>
               <p className='p-bold-20 text-grey-600'>Team info:</p>
               <p className='p-medium-16 lg:p-regular-18'>{team.description}</p>
@@ -79,6 +96,20 @@ const TeamDetails = async ({ params: { id } }: SearchParamProps) => {
             </div>
           </div>
         </div>
+      </section>
+      {/* TEAMS WITH THE SAME CATEGORY */}
+      <section className='wrapper my-8 flex flex-col gap-8 md:gap-12'>
+        <h2 className='h2-bold'>Related Teams</h2>
+
+        <Collection
+          data={relatedTeams?.data}
+          emptyTitle='No teams yet created'
+          emptyStateSubtext='Comeback later'
+          collectionType='All_Teams'
+          limit={6}
+          page={1}
+          totalPages={2}
+        />
       </section>
     </>
   );

@@ -18,7 +18,7 @@ export type UpdateUserParams = {
 // ====== EVENT PARAMS
 export type CreateTeamParams = {
   userId: string;
-  event: {
+  team: {
     title: string;
     description: string;
     location: string;
@@ -35,7 +35,7 @@ export type CreateTeamParams = {
 
 export type UpdateTeamParams = {
   userId: string;
-  event: {
+  team: {
     _id: string;
     title: string;
     imageUrl: string;
@@ -52,7 +52,7 @@ export type UpdateTeamParams = {
 };
 
 export type DeleteTeamParams = {
-  eventId: string;
+  teamId: string;
   path: string;
 };
 
@@ -71,7 +71,7 @@ export type GetTeamsByUserParams = {
 
 export type GetRelatedTeamsByCategoryParams = {
   categoryId: string;
-  eventId: string;
+  teamId: string;
   limit?: number;
   page: number | string;
 };
@@ -105,8 +105,8 @@ export type CreateCategoryParams = {
 
 // ====== ORDER PARAMS
 export type CheckoutOrderParams = {
-  eventTitle: string;
-  eventId: string;
+  teamTitle: string;
+  teamId: string;
   price: string;
   isFree: boolean;
   buyerId: string;
@@ -114,14 +114,14 @@ export type CheckoutOrderParams = {
 
 export type CreateOrderParams = {
   stripeId: string;
-  eventId: string;
+  teamId: string;
   buyerId: string;
   totalAmount: string;
   createdAt: Date;
 };
 
 export type GetOrdersByEventParams = {
-  eventId: string;
+  teamId: string;
   searchString: string;
 };
 

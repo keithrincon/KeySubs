@@ -23,7 +23,6 @@ import {
   createCategory,
   getAllCategories,
 } from '@/lib/actions/category.actions';
-import { get } from 'http';
 
 type DropdownProps = {
   value?: string;

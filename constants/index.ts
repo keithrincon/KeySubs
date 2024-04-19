@@ -4,7 +4,7 @@ export const headerLinks = [
     route: '/',
   },
   {
-    label: 'Create Event',
+    label: 'Create Team',
     route: '/teams/create',
   },
   {
@@ -13,7 +13,7 @@ export const headerLinks = [
   },
 ];
 
-export const eventDefaultValues = {
+export const teamDefaultValues = {
   title: '',
   description: '',
   location: '',

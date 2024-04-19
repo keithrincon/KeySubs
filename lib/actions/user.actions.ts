@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { connectToDatabase } from '@/lib/database';
 import User from '@/lib/database/models/user.model';
 import Order from '@/lib/database/models/order.model';
-import Event from '@/lib/database/models/team.model';
+import Team from '@/lib/database/models/team.model';
 import { handleError } from '@/lib/utils';
 
 import { CreateUserParams, UpdateUserParams } from '@/types';
@@ -63,8 +63,8 @@ export async function deleteUser(clerkId: string) {
     // Unlink relationships
     await Promise.all([
       // Update the 'events' collection to remove references to the user
-      Event.updateMany(
-        { _id: { $in: userToDelete.events } },
+      Team.updateMany(
+        { _id: { $in: userToDelete.teams } },
         { $pull: { organizer: userToDelete._id } }
       ),
 
