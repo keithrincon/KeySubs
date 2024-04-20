@@ -11,8 +11,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Key Subs',
-  description: 'Add the best players to your team',
+  title: 'KeySubs',
+  description: 'KeySubs is for helping athletes find sports teams to join.',
   icons: {
     icon: 'public/assets/images/logo.svg',
   },

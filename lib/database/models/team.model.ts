@@ -4,12 +4,12 @@ export interface ITeam extends Document {
   _id: string;
   title: string;
   description?: string;
-  location: string;
+  location?: string;
   createdAt: Date;
   imageUrl: string;
   startDateTime: Date;
   endDateTime: Date;
-  price?: number;
+  price: number;
   isFree: boolean;
   url?: string;
   category: { _id: string; name: string };

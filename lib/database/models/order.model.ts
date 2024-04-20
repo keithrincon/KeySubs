@@ -39,7 +39,7 @@ const OrderSchema = new Schema({
   },
   team: {
     type: Schema.Types.ObjectId,
-    ref: 'Event',
+    ref: 'Team',
   },
   buyer: {
     type: Schema.Types.ObjectId,
