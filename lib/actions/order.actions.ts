@@ -18,14 +18,14 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
             currency: 'usd',
             unit_amount: price,
             product_data: {
-              name: order.eventTitle,
+              name: order.teamTitle,
             },
           },
           quantity: 1,
         },
       ],
       metadata: {
-        eventId: order.eventId,
+        teamId: order.teamId,
         buyerId: order.buyerId,
       },
       mode: 'payment',
@@ -44,7 +44,7 @@ export const createOrder = async (order: CreateOrderParams) => {
 
     const newOrder = await Order.create({
       ...order,
-      event: order.eventId,
+      event: order.teamId,
       buyer: order.buyerId,
     });
     return JSON.parse(JSON.stringify(newOrder));
