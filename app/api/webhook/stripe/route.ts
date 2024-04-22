@@ -8,24 +8,24 @@ export async function POST(request: Request) {
   const sig = request.headers.get('stripe-signature') as string;
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
-  let event;
+  let team;
 
   try {
-    event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
+    team = stripe.webhooks.constructEvent(body, sig, endpointSecret);
   } catch (err) {
     return NextResponse.json({ message: 'Webhook error', error: err });
   }
 
   // Get the ID and type
-  const eventType = event.type;
+  const teamType = team.type;
 
   // CREATE
-  if (eventType === 'checkout.session.completed') {
-    const { id, amount_total, metadata } = event.data.object;
+  if (teamType === 'checkout.session.completed') {
+    const { id, amount_total, metadata } = team.data.object;
 
     const order = {
       stripeId: id,
-      eventId: metadata?.eventId || '',
+      teamId: metadata?.teamId || '',
       buyerId: metadata?.buyerId || '',
       totalAmount: amount_total ? (amount_total / 100).toString() : '0',
       createdAt: new Date(),
