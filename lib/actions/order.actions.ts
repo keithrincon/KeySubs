@@ -44,7 +44,7 @@ export const createOrder = async (order: CreateOrderParams) => {
 
     const newOrder = await Order.create({
       ...order,
-      team: order.teamId,
+      event: order.teamId,
       buyer: order.buyerId,
     });
     return JSON.parse(JSON.stringify(newOrder));

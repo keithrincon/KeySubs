@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, Dispatch, SetStateAction } from 'react';
 import type { FileWithPath } from '@uploadthing/react';
 import { useDropzone } from '@uploadthing/react/hooks';
