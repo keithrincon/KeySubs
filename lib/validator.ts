@@ -16,4 +16,5 @@ export const teamFormSchema = z.object({
   price: z.string(),
   isFree: z.boolean(),
   url: z.string().url(),
+  // level: z.string(),
 });

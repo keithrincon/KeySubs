@@ -9,7 +9,7 @@ export interface ITeam extends Document {
   imageUrl: string;
   startDateTime: Date;
   endDateTime: Date;
-  price: number;
+  price: string;
   isFree: boolean;
   url?: string;
   category: { _id: string; name: string };

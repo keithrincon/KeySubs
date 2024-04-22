@@ -16,8 +16,8 @@ const CheckoutButton = ({ team }: { team: ITeam }) => {
     <div className='flex items-center gap-3'>
       {/* Cannot pay for past registrations  */}
       {hasSeasonFinished ? (
-        <p p-2 text-red-400>
-          Sorry, its too late to register for this season.
+        <p className='p-2 text-red-400'>
+          Sorry, its too late to register for this team.
         </p>
       ) : (
         <>

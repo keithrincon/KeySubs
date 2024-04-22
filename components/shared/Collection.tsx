@@ -11,7 +11,7 @@ type CollectionProps = {
   page: number | string;
   totalPages?: number;
   urlParamName?: string;
-  collectionType?: 'Teams_Organized' | 'My_Teams' | 'All_Teams';
+  collectionType?: 'Teams_Organized' | 'My_Registrations' | 'All_Teams';
 };
 
 const Collection = ({
@@ -30,7 +30,7 @@ const Collection = ({
           <ul className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10'>
             {data.map((team) => {
               const hasOrderLink = collectionType === 'Teams_Organized';
-              const hidePrice = collectionType === 'My_Teams';
+              const hidePrice = collectionType === 'My_Registrations';
 
               return (
                 <li key={team._id} className='flex justify-center'>

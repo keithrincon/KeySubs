@@ -29,6 +29,7 @@ import { Checkbox } from '../ui/checkbox';
 import { useRouter } from 'next/navigation';
 import { createTeam, updateTeam } from '@/lib/actions/event.action';
 import { ITeam } from '@/lib/database/models/team.model';
+// import LevelDropdown from './LevelDropdown';
 
 type TeamFormProps = {
   userId: string;
@@ -208,6 +209,22 @@ const TeamForm = ({ userId, type, team, teamId }: TeamFormProps) => {
               </FormItem>
             )}
           />
+          {/* <FormField
+            control={form.control}
+            name='levelId'
+            render={({ field }) => (
+              <FormItem className='w-full'>
+                <FormControl>
+                  <LevelDropdown
+
+                    onChangeHandler={field.onChange}
+                    value={field.value}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          /> */}
         </div>
         <div className='flex flex-col gap-5 md:flex-row'>
           <FormField

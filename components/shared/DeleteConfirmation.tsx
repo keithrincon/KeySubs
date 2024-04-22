@@ -35,9 +35,11 @@ export const DeleteConfirmation = ({ teamId }: { teamId: string }) => {
 
       <AlertDialogContent className='bg-white'>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure you want to delete?</AlertDialogTitle>
+          <AlertDialogTitle>
+            Are you sure you want to delete team?
+          </AlertDialogTitle>
           <AlertDialogDescription className='p-regular-16 text-grey-600'>
-            This will permanently delete this event
+            This will permanently delete this team!
           </AlertDialogDescription>
         </AlertDialogHeader>
 

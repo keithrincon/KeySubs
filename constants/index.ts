@@ -24,4 +24,5 @@ export const teamDefaultValues = {
   price: '',
   isFree: false,
   url: '',
+  // level: '',
 };

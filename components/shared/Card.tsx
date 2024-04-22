@@ -2,9 +2,10 @@ import { ITeam } from '@/lib/database/models/team.model';
 import { formatDateTime } from '@/lib/utils';
 import { auth } from '@clerk/nextjs';
 import Image from 'next/image';
-import Link from 'next/link';
+
 import React from 'react';
 import { DeleteConfirmation } from './DeleteConfirmation';
+import Link from 'next/link';
 
 type CardProps = {
   team: ITeam;
@@ -24,7 +25,8 @@ const Card = ({ team, hasOrderLink, hidePrice }: CardProps) => {
         href={`/teams/${team._id}`}
         style={{ backgroundImage: `url(${team.imageUrl})` }}
         className='flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500'
-      ></Link>
+      />
+      {/*  IS TEAM CREATOR */}
 
       {isTeamCreator && !hidePrice && (
         <div className='absolute right-2 top-2 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all'>

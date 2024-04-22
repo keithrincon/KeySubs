@@ -31,7 +31,7 @@ type DropdownProps = {
 
 const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
   const [sports, setSports] = useState<ICategory[]>([]);
-  // const [categories, setCategories] = useState<ICategory[]>([]);
+
   const [newSport, setNewSport] = useState('');
 
   const handleAddSport = () => {

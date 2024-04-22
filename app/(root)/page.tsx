@@ -42,7 +42,10 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id='team' className='wrapper my-8 flex flex-col gap-8 md:gap-12'>
+      <section
+        id='teams'
+        className='wrapper my-8 flex flex-col gap-8 md:gap-12'
+      >
         <h2 className='h2-bold'>
           Trusted by: <br /> Big League Dreams <br /> Redding Soccer Park <br />
           and more...
