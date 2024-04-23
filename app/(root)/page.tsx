@@ -3,12 +3,20 @@ import { Button } from '@/components/ui/button';
 import { getAllTeams } from '@/lib/actions/event.action';
 import Image from 'next/image';
 import Link from 'next/link';
+import Search from '@/components/shared/Search';
+import { SearchParamProps } from '@/types';
+import { Cat } from 'lucide-react';
+import CategoryFilter from '@/components/shared/CategoryFilter';
 
-export default async function Home() {
+export default async function Home({ searchParams }: SearchParamProps) {
+  const page = Number(searchParams?.page) || 1;
+  const searchText = (searchParams?.query as string) || '';
+  const category = (searchParams?.category as string) || '';
+
   const teams = await getAllTeams({
-    query: '',
-    category: '',
-    page: 1,
+    query: searchText,
+    category,
+    page,
     limit: 6,
   });
 
@@ -51,12 +59,15 @@ export default async function Home() {
           and more...
         </h2>
 
-        <div className='flex w-full flex-col gap-5 md:flex-row'></div>
+        <div className='flex w-full flex-col gap-5 md:flex-row'>
+          <Search />
+          <CategoryFilter />
+        </div>
 
         <Collection
           data={teams?.data}
-          emptyTitle='No teams yet created'
-          emptyStateSubtext='Comeback later'
+          emptyTitle='No teams created yet'
+          emptyStateSubtext='Come back later'
           collectionType='All_Teams'
           limit={6}
           page={1}

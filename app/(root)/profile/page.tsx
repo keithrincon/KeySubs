@@ -1,16 +1,28 @@
 import Collection from '@/components/shared/Collection';
 import { Button } from '@/components/ui/button';
 import { getTeamsByUser } from '@/lib/actions/event.action';
+import { getOrdersByUser } from '@/lib/actions/order.actions';
+import { IOrder } from '@/lib/database/models/order.model';
+import { SearchParamProps } from '@/types';
 import { auth } from '@clerk/nextjs';
 import Link from 'next/link';
 import React from 'react';
 
-const ProfilePage = async () => {
+const ProfilePage = async ({ searchParams }: SearchParamProps) => {
   const { sessionClaims } = auth();
   // gets the user id from the session
   const userId = sessionClaims?.userId as string;
 
-  const organizedTeams = await getTeamsByUser({ userId, page: 1 });
+  const ordersPage = Number(searchParams?.ordersPage || 1);
+  const teamsPage = Number(searchParams?.teamsPage || 1);
+
+  const orders = await getOrdersByUser({ userId, page: ordersPage });
+
+  const orderedTeams = orders?.data.map((order: IOrder) => order.team) || [];
+
+  const organizedTeams = await getTeamsByUser({ userId, page: teamsPage });
+
+  console.log({ orderedTeams });
 
   return (
     <>
@@ -26,18 +38,18 @@ const ProfilePage = async () => {
       </section>
 
       {/* MY TEAMS */}
-      {/* <section className='wrapper my-8'>
+      <section className='wrapper my-8'>
         <Collection
-          data={teams?.data}
+          data={orderedTeams}
           emptyTitle='No teams joined yet'
           emptyStateSubtext='No worries - plenty of sports teams to play in!'
           collectionType='My_Registrations'
           limit={3}
-          page={1}
+          page={ordersPage}
           urlParamName='ordersPage'
-          totalPages={2}
+          totalPages={orders?.totalPages}
         />
-      </section> */}
+      </section>
 
       {/* TEAMS CREATED */}
       <section className='bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10'>
@@ -55,9 +67,9 @@ const ProfilePage = async () => {
           emptyStateSubtext='Feel free to create yours now!'
           collectionType='Teams_Organized'
           limit={6}
-          page={1}
+          page={teamsPage}
           urlParamName='teamsPage'
-          totalPages={2}
+          totalPages={organizedTeams?.totalPages}
         />
       </section>
     </>
