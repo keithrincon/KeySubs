@@ -26,10 +26,10 @@ const Checkout = ({ team, userId }: { team: ITeam; userId: string }) => {
 
   const onCheckout = async () => {
     const order = {
-      teamTitle: team.title,
-      teamId: team._id,
-      price: team.price,
-      isFree: team.isFree,
+      eventTitle: event.title,
+      eventId: event._id,
+      price: event.price,
+      isFree: event.isFree,
       buyerId: userId,
     };
     await checkoutOrder(order);
