@@ -35,7 +35,7 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
         },
       ],
       metadata: {
-        team: order.teamId,
+        teamId: order.teamId,
         buyerId: order.buyerId,
       },
       mode: 'payment',
