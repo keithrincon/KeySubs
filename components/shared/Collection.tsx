@@ -43,6 +43,7 @@ const Collection = ({
               );
             })}
           </ul>
+
           {totalPages > 1 && (
             <Pagination
               urlParamName={urlParamName}

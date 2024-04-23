@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Search from '@/components/shared/Search';
 import { SearchParamProps } from '@/types';
-import { Cat } from 'lucide-react';
 import CategoryFilter from '@/components/shared/CategoryFilter';
 
 export default async function Home({ searchParams }: SearchParamProps) {
@@ -70,8 +69,8 @@ export default async function Home({ searchParams }: SearchParamProps) {
           emptyStateSubtext='Come back later'
           collectionType='All_Teams'
           limit={6}
-          page={1}
-          totalPages={2}
+          page={page}
+          totalPages={teams?.totalPages}
         />
       </section>
     </>

@@ -106,9 +106,9 @@ const TeamDetails = async ({
           emptyTitle='No teams yet created'
           emptyStateSubtext='Comeback later'
           collectionType='All_Teams'
-          limit={6}
-          page={1}
-          totalPages={2}
+          limit={3}
+          page={searchParams.page as string}
+          totalPages={relatedTeams?.totalPages}
         />
       </section>
     </>

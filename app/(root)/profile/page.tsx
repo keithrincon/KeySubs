@@ -66,7 +66,7 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
           emptyTitle='No teams have been created yet'
           emptyStateSubtext='Feel free to create yours now!'
           collectionType='Teams_Organized'
-          limit={6}
+          limit={3}
           page={teamsPage}
           urlParamName='teamsPage'
           totalPages={organizedTeams?.totalPages}
