@@ -28,14 +28,14 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
             currency: 'usd',
             unit_amount: price,
             product_data: {
-              name: order.eventTitle,
+              name: order.teamTitle,
             },
           },
           quantity: 1,
         },
       ],
       metadata: {
-        teamId: order.eventId,
+        team: order.teamId,
         buyerId: order.buyerId,
       },
       mode: 'payment',

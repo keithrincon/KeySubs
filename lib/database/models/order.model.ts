@@ -19,8 +19,8 @@ export type IOrderItem = {
   _id: string;
   totalAmount: string;
   createdAt: Date;
-  eventTitle: string;
-  evntId: string;
+  teamTitle: string;
+  teamId: string;
   buyer: string;
 };
 

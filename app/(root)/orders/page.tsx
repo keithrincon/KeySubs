@@ -5,7 +5,7 @@ import { SearchParamProps } from '@/types';
 import { IOrderItem } from '@/lib/database/models/order.model';
 
 const Orders = async ({ searchParams }: SearchParamProps) => {
-  const teamId = (searchParams?.eventId as string) || '';
+  const teamId = (searchParams?.teamId as string) || '';
   const searchText = (searchParams?.query as string) || '';
 
   const orders = await getOrdersByEvent({ teamId, searchString: searchText });
@@ -13,7 +13,9 @@ const Orders = async ({ searchParams }: SearchParamProps) => {
   return (
     <>
       <section className=' bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10'>
-        <h3 className='wrapper h3-bold text-center sm:text-left '>Orders</h3>
+        <h3 className='wrapper h3-bold text-center sm:text-left '>
+          Registrations
+        </h3>
       </section>
 
       <section className='wrapper mt-8'>
@@ -24,7 +26,7 @@ const Orders = async ({ searchParams }: SearchParamProps) => {
         <table className='w-full border-collapse border-t'>
           <thead>
             <tr className='p-medium-14 border-b text-grey-500'>
-              <th className='min-w-[250px] py-3 text-left'>Order ID</th>
+              <th className='min-w-[250px] py-3 text-left'>Registration ID</th>
               <th className='min-w-[200px] flex-1 py-3 pr-4 text-left'>
                 Team Title
               </th>

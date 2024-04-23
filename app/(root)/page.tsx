@@ -1,11 +1,11 @@
+import CategoryFilter from '@/components/shared/CategoryFilter';
 import Collection from '@/components/shared/Collection';
+import Search from '@/components/shared/Search';
 import { Button } from '@/components/ui/button';
 import { getAllTeams } from '@/lib/actions/event.action';
+import { SearchParamProps } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import Search from '@/components/shared/Search';
-import { SearchParamProps } from '@/types';
-import CategoryFilter from '@/components/shared/CategoryFilter';
 
 export default async function Home({ searchParams }: SearchParamProps) {
   const page = Number(searchParams?.page) || 1;
@@ -18,8 +18,6 @@ export default async function Home({ searchParams }: SearchParamProps) {
     page,
     limit: 6,
   });
-
-  console.log(teams);
 
   return (
     <>

@@ -2,7 +2,6 @@ import { ITeam } from '@/lib/database/models/team.model';
 import { formatDateTime } from '@/lib/utils';
 import { auth } from '@clerk/nextjs';
 import Image from 'next/image';
-
 import React from 'react';
 import { DeleteConfirmation } from './DeleteConfirmation';
 import Link from 'next/link';
