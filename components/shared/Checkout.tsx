@@ -9,7 +9,7 @@ import { checkoutOrder } from '@/lib/actions/order.actions';
 // recreating the `Stripe` object on every render.
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
-const Checkout = ({ event, userId }: { event: ITeam; userId: string }) => {
+const Checkout = ({ team, userId }: { team: ITeam; userId: string }) => {
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
@@ -26,10 +26,10 @@ const Checkout = ({ event, userId }: { event: ITeam; userId: string }) => {
 
   const onCheckout = async () => {
     const order = {
-      eventTitle: event.title,
-      eventId: event._id,
-      price: event.price,
-      isFree: event.isFree,
+      teamTitle: team.title,
+      teamId: team._id,
+      price: team.price,
+      isFree: team.isFree,
       buyerId: userId,
     };
     await checkoutOrder(order);
@@ -38,7 +38,7 @@ const Checkout = ({ event, userId }: { event: ITeam; userId: string }) => {
   return (
     <form action={onCheckout} method='post'>
       <Button type='submit' role='link' size='lg' className='button sm:w-fit'>
-        {event.isFree ? 'Register' : 'Pay Registration Fee'}
+        {team.isFree ? 'Register' : 'Pay Registration Fee'}
       </Button>
     </form>
   );
