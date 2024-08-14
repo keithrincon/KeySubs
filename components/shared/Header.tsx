@@ -9,9 +9,10 @@ import MobileNav from './MobileNav';
 const Header = () => {
   return (
     <header className='w-full border-b'>
-      <div className='wrapper flex item-center justify-between'>
+      <div className='wrapper flex items-center justify-between'>
         <Link href='/' className='w-36'>
           <Image
+            // src='public/assets/images/logo1.svg'
             src='/assets/images/logo.svg'
             width={128}
             height={38}

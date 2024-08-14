@@ -28,6 +28,7 @@ const MobileNav = () => {
         <SheetContent className='flex flex-col gap-6 bg-white md:hidden'>
           <Image
             src='/assets/images/logo.svg'
+            // src='public/assets/images/logo1.svg'
             width={128}
             height={38}
             alt='Key Subs logo'
